@@ -3,18 +3,18 @@
 # Version: 1.0.0
 # Author: Chris Hawkins (Redgate Software Ltd)
 # Last Updated: 2025-11-15
-# Description: Flyway Migrations Based - Use the GENERATE verb to create migration scripts
+# Description: Flyway Migrations Based - Use the DIFF & GENERATE verbs to create a Migration and Undo script for the changes found in the Schema Model
 # ===========================
 
 # Variables - Customize these for your environment #
-$ARTIFACT_FILENAME = "%temp%/Artifacts/Flyway.Development.differences-$(get-date -f yyyyMMdd).zip"  # Input artifact file from diff operation
-$WORKING_DIRECTORY = "C:\WorkingFolders\FWD\Pagila"  # Path to Flyway project root
-$SOURCE_ENVIRONMENT = "schemaModel"
-$TARGET_ENVIRONMENT = "migrations"
-$BUILD_ENVIRONMENT = "shadow"
-$BUILD_ENVIRONMENT_USERNAME = "postgres"
-$BUILD_ENVIRONMENT_PASSWORD = "Redg@te1"
-$FLYWAY_VERSION_DESCRIPTION = "FlywayCLI_AutomatedMigrationScript"
+$ARTIFACT_FILENAME = "%temp%/Artifacts/Flyway.Migrations.differences-$(get-date -f yyyyMMdd).zip"  # Output file for generated migrations
+$WORKING_DIRECTORY = "C:\WorkingFolders\FWD\NewWorldDB"  # Path to Flyway project root
+$SOURCE_ENVIRONMENT = "schemaModel"  # Source environment name (desired state)
+$TARGET_ENVIRONMENT = "migrations"  # Target environment name (existing migrations)
+$BUILD_ENVIRONMENT = "shadow"  # Build database environment name for validation
+$BUILD_ENVIRONMENT_USERNAME = ""  # Build database username (leave empty for flyway.toml)
+$BUILD_ENVIRONMENT_PASSWORD = ""  # Build database password (use env variables in production)
+$FLYWAY_VERSION_DESCRIPTION = "FlywayCLI_AutomatedMigrationScript"  # Description for migration script filename
 
 # Calculate the differences between two entities (Databases/Folders & More) #
 flyway diff generate `
